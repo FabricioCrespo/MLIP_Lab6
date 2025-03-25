@@ -15,27 +15,27 @@ pipeline {
                 sh '''#!/bin/bash
                 echo 'Test Step: We run testing tool like pytest here'
 
-                # Inicializar Conda (ruta de Anaconda)
-                source ~/anaconda3/etc/profile.d/conda.sh
+                # TODO fill out the path to conda here
+             
+                sudo /opt/anaconda/etc/profile.d/conda.sh init
 
-                # Activar el entorno Conda (ajusta el nombre del entorno)
-                conda activate mlip_env
+                # CREATE ENV 
+
+                sudo /opt/anaconda/etc/profile.d/conda.sh create -n mlip python pytest numpy pandas scikit-learn -c conda-forge
+
+                # TODO Complete the command to run pytest
                 
-                # Ejecutar Pytest y generar un reporte en XML para Jenkins
-                pytest tests/ --junitxml=report.xml
+                sudo /opt/anaconda/etc/profile.d/conda.sh run -n mlip pytest
 
-                echo 'pytest completed successfully'
+                echo 'pytest not runned'
+                exit 1 #comment this line after implementing Jenkinsfile
                 '''
-            }
-        }
-        stage('Report') {
-            steps {
-                junit 'report.xml'
+
             }
         }
         stage('Deploy') {
             steps {
-                echo 'In this step, we deploy our project'
+                echo 'In this step, we deploy our porject'
                 echo 'Depending on the context, we may publish the project artifact or upload pickle files'
             }
         }

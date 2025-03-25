@@ -2,6 +2,22 @@ pipeline {
     agent any
 
     stages {
+        stage('Install Anaconda') {
+            steps {
+                sh '''
+                # Descargar el instalador de Anaconda
+                wget https://repo.anaconda.com/archive/Anaconda3-2023.03-Linux-x86_64.sh -O ~/anaconda.sh
+
+                # Instalar Anaconda
+                bash ~/anaconda.sh -b -p $HOME/anaconda3
+
+                # Activar conda
+                source $HOME/anaconda3/etc/profile.d/conda.sh
+                conda init bash
+                '''
+            }
+        }
+
         stage('Build') {
             steps {
                 sh '''
@@ -15,8 +31,8 @@ pipeline {
                 sh '''
                 echo 'Test Step: We run testing tool like pytest here'
 
-                # Ejecutar en bash para que funcione 'source'
-                bash -c "source /var/jenkins_home/miniconda3/etc/profile.d/conda.sh && conda activate mlip_env && pytest tests/ --junitxml=report.xml"
+                # Usar Anaconda
+                bash -c "source $HOME/anaconda3/etc/profile.d/conda.sh && conda activate mlip_env && pytest tests/ --junitxml=report.xml"
                 '''
             }
         }

@@ -17,7 +17,7 @@ pipeline {
 
                 # TODO fill out the path to conda here
              
-                #sudo /opt/anaconda/etc/profile.d/conda.sh init
+                #sudo /opt/anaconda/etc/profile.d/conda.sh init #No neccesary due to docker file
 
                 # TODO Complete the command to run pytest
                 

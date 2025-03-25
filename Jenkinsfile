@@ -6,7 +6,7 @@ pipeline {
             steps {
                 sh '''
                 # Instalar wget
-                apt-get update && apt-get install -y wget
+                sudo apt-get update && apt-get install -y wget
 
                 # Descargar el instalador de Anaconda
                 wget https://repo.anaconda.com/archive/Anaconda3-2023.03-Linux-x86_64.sh -O ~/anaconda.sh

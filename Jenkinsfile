@@ -15,16 +15,8 @@ pipeline {
                 sh '''
                 echo 'Test Step: We run testing tool like pytest here'
 
-                # Inicializar Conda (ajusta la ruta si es necesario)
-                source ~/miniconda3/etc/profile.d/conda.sh
-
-                # Activar el entorno Conda (ajusta el nombre del entorno)
-                conda activate mlip_env
-                
-                # Ejecutar Pytest y generar un reporte en XML para Jenkins
-                pytest tests/ --junitxml=report.xml
-
-                echo 'pytest completed successfully'
+                # Ejecutar en bash para que funcione 'source'
+                bash -c "source /var/jenkins_home/miniconda3/etc/profile.d/conda.sh && conda activate mlip_env && pytest tests/ --junitxml=report.xml"
                 '''
             }
         }

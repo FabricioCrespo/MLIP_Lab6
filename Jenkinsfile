@@ -17,18 +17,14 @@ pipeline {
 
                 # TODO fill out the path to conda here
              
-                sudo /opt/anaconda/etc/profile.d/conda.sh init
-
-                # CREATE ENV 
-
-                sudo /opt/anaconda/etc/profile.d/conda.sh create -n mlip python pytest numpy pandas scikit-learn -c conda-forge
+                #sudo /opt/anaconda/etc/profile.d/conda.sh init
 
                 # TODO Complete the command to run pytest
                 
-                sudo /opt/anaconda/etc/profile.d/conda.sh run -n mlip pytest
+                conda run -n mlip pytest
 
-                echo 'pytest not runned'
-                exit 1 #comment this line after implementing Jenkinsfile
+                #echo 'pytest not runned'
+                #exit 1 #comment this line after implementing Jenkinsfile
                 '''
 
             }

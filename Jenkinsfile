@@ -2,9 +2,12 @@ pipeline {
     agent any
 
     stages {
-        stage('Install Anaconda') {
+        stage('Install wget and Anaconda') {
             steps {
                 sh '''
+                # Instalar wget
+                apt-get update && apt-get install -y wget
+
                 # Descargar el instalador de Anaconda
                 wget https://repo.anaconda.com/archive/Anaconda3-2023.03-Linux-x86_64.sh -O ~/anaconda.sh
 
@@ -26,6 +29,7 @@ pipeline {
                 '''
             }
         }
+
         stage('Test') {
             steps {
                 sh '''
@@ -36,11 +40,13 @@ pipeline {
                 '''
             }
         }
+
         stage('Report') {
             steps {
                 junit 'report.xml'
             }
         }
+
         stage('Deploy') {
             steps {
                 echo 'In this step, we deploy our project'
